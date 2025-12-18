@@ -9,8 +9,8 @@ flowchart TD
     C --> E[Удобрение]
     B --> D
     B --> E
-    D --> F[Заказ]
-    E --> F
+    D --> B
+    E --> B
     
     classDef title fill:#f0a,stroke:#000,stroke-width:2px;
     classDef entity fill:#1a1a1a,stroke:#fff,stroke-width:2px;
