@@ -20,12 +20,12 @@ class SellerServiceImpl(
 ) : SellerService {
 
     override fun registerSeller(storeName: String, contactEmail: String): Result<Seller> {
-        val existingSeller = sellerRepository.findByEmail(Email(contactEmail))
-        if (existingSeller != null) {
-            return Result.failure(IllegalArgumentException("Seller with email $contactEmail already exists"))
-        }
-
         return try {
+            val existingSeller = sellerRepository.findByEmail(Email(contactEmail))
+            if (existingSeller != null) {
+                return Result.failure(IllegalArgumentException("Seller with email $contactEmail already exists"))
+            }
+
             val seller = Seller.create(storeName, contactEmail)
             val saved = sellerRepository.save(seller)
             Result.success(saved)
