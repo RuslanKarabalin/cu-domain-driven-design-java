@@ -55,6 +55,7 @@ class OrderServiceImpl(
                         unitPrice = cactus.price
                     )
                 }
+
                 is ProductId.FertilizerProductId -> {
                     val fertilizer = fertilizerRepository.findById(request.productId.fertilizerId)
                         ?: return Result.failure(IllegalArgumentException("Fertilizer not found: ${request.productId.fertilizerId}"))

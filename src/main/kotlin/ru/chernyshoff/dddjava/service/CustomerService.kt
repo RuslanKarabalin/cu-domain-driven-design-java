@@ -23,12 +23,12 @@ class CustomerServiceImpl(
         phone: String,
         address: Address
     ): Result<Customer> {
-        val existingCustomer = customerRepository.findByEmail(Email(email))
-        if (existingCustomer != null) {
-            return Result.failure(IllegalArgumentException("Customer with email $email already exists"))
-        }
-
         return try {
+            val existingCustomer = customerRepository.findByEmail(Email(email))
+            if (existingCustomer != null) {
+                return Result.failure(IllegalArgumentException("Customer with email $email already exists"))
+            }
+
             val customer = Customer.create(name, email, phone, address)
             val saved = customerRepository.save(customer)
             Result.success(saved)
